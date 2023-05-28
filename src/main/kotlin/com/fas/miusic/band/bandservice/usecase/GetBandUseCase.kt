@@ -2,23 +2,22 @@ package com.fas.miusic.band.bandservice.usecase
 
 import com.fas.miusic.band.bandservice.core.model.Band
 import com.fas.miusic.band.bandservice.infrastructure.datasource.db.BandRepository
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Service
+import mu.KotlinLogging
 
-@Service
-class GetBandUseCase {
-
-
-    @Autowired
-    lateinit var repository: BandRepository
+class GetBandUseCase(val repository: BandRepository) {
+    private val logger = KotlinLogging.logger {}
 
     fun getBand(id: Long) : Band {
-        var findById = repository.findById(id)
-        return findById.orElseThrow()
+        logger.info("get band by id $id")
+        val findById = repository.findById(id).orElseThrow()
+        logger.debug { "band found ${findById.id}" }
+        return findById
     }
 
     fun getAll(): List<Band> {
-        return repository.findAll().toList()
+        logger.info("get all bands")
+        val bands = repository.findAll().toList()
+        logger.debug { "bands found ${bands.size}" }
+        return bands
     }
-
 }

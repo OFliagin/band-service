@@ -7,29 +7,33 @@ import java.time.LocalDateTime
 
 @Entity
 @Table(name = "band")
-class Band {
+data class Band(
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
-    var id: Long? = null
+    var id: Long? = null,
 
     @Column(name = "name", nullable = false, length = 50)
-    val name: String? = null
+    var name: String? = null,
 
     @Column(name = "description", length = 250)
-    private val description: String? = null
+    var description: String? = null,
 
     @Column(name = "update_date", nullable = false)
     @UpdateTimestamp
-    val updateDate: LocalDateTime? = null
+    var updateDate: LocalDateTime? = null,
 
     @Column(name = "create_date", nullable = false)
     @CreationTimestamp
-    val createDate: LocalDateTime? = null
+    var createDate: LocalDateTime? = null,
 
     @Column(name = "adress_id")
-    val adressId: Long? = null
+    var adressId: Long? = null,
 
     @Column(name = "deleted", nullable = false)
-    val deleted = false
-}
+    var deleted : Boolean = false
+) {
+
+constructor(name: String?, description: String?, adressId: Long?) : this(null, name, description, null, null, adressId, false)
+
+    }
