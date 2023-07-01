@@ -2,6 +2,7 @@ package com.fas.miusic.band.bandservice.usecase
 
 import com.fas.miusic.band.bandservice.BandMainTest
 import com.fas.miusic.band.bandservice.core.model.Band
+import com.fas.miusic.band.bandservice.infrastructure.datasource.db.BandRepository
 import mu.KotlinLogging
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions
@@ -13,6 +14,10 @@ import org.springframework.util.CollectionUtils
 
 class GetBandUseCaseTest : BandMainTest() {
     private val logger = KotlinLogging.logger {}
+
+
+    @Autowired
+    lateinit var bandRepository: BandRepository
 
 
     @Autowired
